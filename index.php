@@ -4,7 +4,7 @@
 
     if(isset($_GET['page'])) {
 
-        include "views/" . $_GET['page'];
+        include "views/" . $_GET['page'].".php";
 
     }else {
 
