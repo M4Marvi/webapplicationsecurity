@@ -1,10 +1,26 @@
 <?php
 
-    include 'models/User.php';
+    session_start();
+
     include 'models/enums/Response.php';
     include 'models/enums/Page.php';
     include 'models/enums/Action.php';
+
     include 'models/Utilities.php';
+    include 'models/DB_Connector.php';
+
+    include 'models/User.php';
+
+    /*
+     * Imports configuration variables
+     */
+    $configuration = Utilities::readJSON('configuration.json');
+
+    /*
+     * Makes connection with DB
+     */
+    $db = new DB_Connector();
+    $db->connect();
 
     $user = new User();
 
@@ -12,7 +28,7 @@
 
     if(isset($_GET['page'])) {
 
-        include "views/" . $_GET['page'].".php";
+        include "views/" . $_GET['page'] .".php";//TODO
 
     }else if(isset($_GET['action'])) {
 

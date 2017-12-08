@@ -1,8 +1,6 @@
 <?php
-    session_start();
 
-class User
-{
+class User {
     function login() {
         if(isset($_GET['action'])) {
             if($_GET['email'] == "me@haseebiqbal.com" && $_GET['password'] = "123456") {

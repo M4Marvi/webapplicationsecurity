@@ -6,7 +6,7 @@
 //    }
 
 $response = $user->login();
-if($response == Response::$Not_Authenticated){
+if($response == Response::$Not_Authenticated) {
 
     echo '<div class="alert alert-danger"> Email or Password is wrong.</div>';
 

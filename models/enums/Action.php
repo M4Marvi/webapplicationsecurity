@@ -1,7 +1,6 @@
 <?php
 
-class Action
-{
+class Action {
     static $Login = 'login';
     static $Logout = 'logout';
 }
