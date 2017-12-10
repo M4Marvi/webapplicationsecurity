@@ -19,18 +19,16 @@
     /*
      * Makes connection with DB
      */
-    $db = new DB_Connector();
-    $db->connect();
+    $dbConnector = new DB_Connector();
+    $db = $dbConnector->connect();
 
     $user = new User();
 
+    //$_GET = Utilities::clean($_GET);//TODO: Activate later when clean() is implemented
+
     include "views/includes/header.php";
 
-    if(isset($_GET['page'])) {
-
-        include "views/" . $_GET['page'] .".php";//TODO
-
-    }else if(isset($_GET['action'])) {
+    if(isset($_GET['action'])) {
 
         $action = $_GET['action'];
         switch ($action) {
@@ -45,17 +43,30 @@
                 include "views/login.php";
                 break;
 
+            case Action::$Signup_Do:
+                include "views/signup.php";
+                break;
+
             default:
-                die('<div class="alert alert-danger">Request contains invalid parameters.</div>');//TODO
+                Utilities::goToError("Request contains invalid parameters.");
                 break;
         }
 
-    }else {
+    } else if(isset($_GET['page'])) {
+
+        include "views/" . $_GET['page'] .".php";//TODO
+
+    } else {
 
         include "views/home.php";
 
     }
 
     include "views/includes/footer.php";
+
+    /*
+     * Disconnecting DB once everything is included
+     */
+    $dbConnector->disconnect();
 
 ?>

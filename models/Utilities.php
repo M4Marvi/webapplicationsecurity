@@ -9,6 +9,10 @@ class Utilities {
         header('Location: ' . $url);
     }
 
+    static function goToError($errorString) {
+        Utilities::goToURL(Page::$Error . '?error=' . urlencode($errorString));
+    }
+
     /*
      * Reads any json file and returns PHP Array
      */

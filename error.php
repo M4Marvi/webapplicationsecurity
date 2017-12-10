@@ -24,7 +24,7 @@
 
         if($configuration['environment'] == 'dev') {
             ?>
-            <div class="alert alert-danger"><?= $_GET['error']; ?></div>
+            <div class="alert alert-danger"><?= urldecode($_GET['error']); ?></div>
             <?php
         }
     }

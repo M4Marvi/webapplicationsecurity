@@ -14,7 +14,15 @@ class User {
         }
     }
 
-    function signup() {
+    function signup($db) {
+
+        $sql = "INSERT INTO user (`email`, `password`) VALUES ('$_GET[email]', '$_GET[password]')";
+
+        if($db->query($sql) === true) {
+            return Response::$Success;
+        } else {;
+            Utilities::goToError($db->error);
+        }
 
     }
 

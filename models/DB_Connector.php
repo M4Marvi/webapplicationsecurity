@@ -7,6 +7,7 @@ class DB_Connector {
     private $serverName = "bh-4.webhostbox.net";
     private $userName = "haseebiq_dev";
     private $password = ".QCDL%g.k6@9";
+    private $databaseName = "haseebiq_was_ws_17_18";
     private $isConnectedToDB = false;
 
     /*
@@ -14,15 +15,17 @@ class DB_Connector {
      */
     function connect() {
         // Create connection
-        $this->db_instance = new mysqli($this->serverName, $this->userName, $this->password);
+        $this->db_instance = new mysqli($this->serverName, $this->userName, $this->password, $this->databaseName);
 
         // Check connection
         if ($this->db_instance->connect_error) {
-            Utilities::goToURL(Page::$Error . '?error=' . $this->db_instance->connect_error);
+            Utilities::goToError($this->db_instance->connect_error);
             $this->isConnectedToDB = false;
         }else {
             $this->isConnectedToDB = true;
         }
+
+        return $this->db_instance;
     }
 
     /*
@@ -32,7 +35,7 @@ class DB_Connector {
         return $this->isConnectedToDB;
     }
 
-    public function __destruct() {
+    function disconnect() {
         // TODO: Implement __destruct() method.
         $this->db_instance->close();
     }
